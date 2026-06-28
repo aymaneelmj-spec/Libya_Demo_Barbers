@@ -1,3 +1,9 @@
+window.onerror = function(err){
+
+  console.log("GLOBAL ERROR:", err);
+
+};
+
 const params = new URLSearchParams(window.location.search);
 
 const barberId = params.get("id") || 0;
@@ -1380,78 +1386,72 @@ if(gallery){
   let images = [];
 
   // NEW FORMAT
-  if(BARBER_DATA.images){
+  if(
+    BARBER_DATA.images &&
+    Array.isArray(BARBER_DATA.images)
+  ){
 
     images = BARBER_DATA.images;
 
   }
 
-  // OLD demo_url FORMAT
+  // OLD FORMAT
   else if(BARBER_DATA.demo_url){
 
     try {
 
-      const url =
-        new URL(BARBER_DATA.demo_url);
+      const splitPart =
+        BARBER_DATA.demo_url.split("images=")[1];
 
-      const encodedImages =
-        url.searchParams.get("images");
-
-      if(encodedImages){
+      if(splitPart){
 
         images =
-          decodeURIComponent(encodedImages)
+          decodeURIComponent(splitPart)
             .split(",");
 
       }
 
     } catch(err){
 
-      console.log("Image parse error:", err);
+      console.log("Gallery Parse Error:", err);
 
     }
 
   }
 
+  // CLEAN IMAGES
+  images = images
+    .map(img => img.trim())
+    .filter(Boolean);
+
   // LIMIT
   images = images.slice(0, 12);
 
-  // CREATE GALLERY
+  // CREATE ITEMS
   images.forEach((img, index) => {
-
-    img = img.trim();
-
-    if(!img) return;
 
     const item =
       document.createElement("div");
 
     item.className = "gallery-item";
 
-    item.setAttribute(
-      "data-index",
-      index
-    );
-
     item.innerHTML = `
       <img
         src="${img}"
         loading="lazy"
-        width="400"
-        height="400"
         alt="${BARBER_DATA.name}"
       >
-
-      <div class="gallery-overlay">
-        <span>${BARBER_DATA.name}</span>
-      </div>
     `;
 
     const image =
       item.querySelector("img");
 
     image.onerror = () => {
+
+      console.log("Image failed:", img);
+
       item.style.display = "none";
+
     };
 
     gallery.appendChild(item);
