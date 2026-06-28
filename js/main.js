@@ -1369,6 +1369,99 @@ let PHONE = '966000000000';
 
 function applyBarberData(){
 
+// DYNAMIC GALLERY
+const gallery =
+  document.getElementById("galleryGrid");
+
+if(gallery){
+
+  gallery.innerHTML = "";
+
+  let images = [];
+
+  // NEW FORMAT
+  if(BARBER_DATA.images){
+
+    images = BARBER_DATA.images;
+
+  }
+
+  // OLD demo_url FORMAT
+  else if(BARBER_DATA.demo_url){
+
+    try {
+
+      const url =
+        new URL(BARBER_DATA.demo_url);
+
+      const encodedImages =
+        url.searchParams.get("images");
+
+      if(encodedImages){
+
+        images =
+          decodeURIComponent(encodedImages)
+            .split(",");
+
+      }
+
+    } catch(err){
+
+      console.log("Image parse error:", err);
+
+    }
+
+  }
+
+  // LIMIT
+  images = images.slice(0, 12);
+
+  // CREATE GALLERY
+  images.forEach((img, index) => {
+
+    img = img.trim();
+
+    if(!img) return;
+
+    const item =
+      document.createElement("div");
+
+    item.className = "gallery-item";
+
+    item.setAttribute(
+      "data-index",
+      index
+    );
+
+    item.innerHTML = `
+      <img
+        src="${img}"
+        loading="lazy"
+        width="400"
+        height="400"
+        alt="${BARBER_DATA.name}"
+      >
+
+      <div class="gallery-overlay">
+        <span>${BARBER_DATA.name}</span>
+      </div>
+    `;
+
+    const image =
+      item.querySelector("img");
+
+    image.onerror = () => {
+      item.style.display = "none";
+    };
+
+    gallery.appendChild(item);
+
+  });
+
+}
+
+
+
   // NAME
   document.title = BARBER_DATA.name;
 
