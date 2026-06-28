@@ -158,8 +158,8 @@ fetch("data.json")
   })();
 
   // ───────────────────────────────────────────────────────────
-let PHONE = '966549785075';
-  var TIKTOK_USERNAME = 'casastar1';
+let PHONE = '966000000000';
+  var TIKTOK_USERNAME = '';
   var TIKTOK_URL = 'https://www.tiktok.com/@' + TIKTOK_USERNAME;
   var currentLang = 'ar';
   // selectedPlatform is set by which float button the user clicks:
@@ -887,7 +887,7 @@ let PHONE = '966549785075';
       msg += '\uD83D\uDCC5 *\u0627\u0644\u0645\u0648\u0639\u062F:* ' + dt + '\n';
       msg += '\uD83D\uDCB3 *\u0637\u0631\u064A\u0642\u0629 \u0627\u0644\u062F\u0641\u0639:* ' + methodLabel + '\n';
       if (methodKey === 'bank') msg += '\uD83C\uDFE6 *IBAN:* ' + OWNER_IBAN + '\n';
-      if (methodKey === 'stc' || methodKey === 'mada') msg += '\uD83D\uDCDE *\u0631\u0642\u0645 \u0627\u0644\u062A\u062D\u0648\u064A\u0644:* +966549785075\n';
+      if (methodKey === 'stc' || methodKey === 'mada') msg += '\uD83D\uDCDE *\u0631\u0642\u0645 \u0627\u0644\u062A\u062D\u0648\u064A\u0644:* +966000000000\n';
       msg += D + '\n';
       msg += '\u2705 \u0633\u064A\u062A\u0645 \u0625\u0631\u0641\u0627\u0642 \u0635\u0648\u0631\u0629 \u0627\u0644\u0625\u064A\u0635\u0627\u0644 \u2014 \u0634\u0643\u0631\u0627\u064B \u0644\u0643\u0645!';
     } else {
@@ -905,7 +905,7 @@ let PHONE = '966549785075';
       msg += '\uD83D\uDCC5 *Appointment:* ' + dt + '\n';
       msg += '\uD83D\uDCB3 *Payment Method:* ' + mLabel + '\n';
       if (methodKey === 'bank') msg += '\uD83C\uDFE6 *IBAN:* ' + OWNER_IBAN + '\n';
-      if (methodKey === 'stc' || methodKey === 'mada') msg += '\uD83D\uDCDE *Transfer Number:* +966549785075\n';
+      if (methodKey === 'stc' || methodKey === 'mada') msg += '\uD83D\uDCDE *Transfer Number:* +966000000000\n';
       msg += D + '\n';
       msg += '\u2705 Receipt screenshot will be attached \u2014 thank you!';
     }
@@ -1078,7 +1078,7 @@ let PHONE = '966549785075';
   // ============================================================
   // PAYMENT MODAL
   // ============================================================
-  var OWNER_IBAN = 'SA9110000001400020838808';
+  var OWNER_IBAN = 'SA9110000000000000000000';
 
   var paymentOverlay = document.getElementById('paymentOverlay');
   var paymentClose   = document.getElementById('paymentClose');
@@ -1242,7 +1242,7 @@ let PHONE = '966549785075';
 
   var copyMobileBtn = document.getElementById('copyMobile');
   if(copyMobileBtn) copyMobileBtn.addEventListener('click', function() {
-    var num = '+966549785075';
+    var num = '+966000000000';
     if(navigator.clipboard) {
       navigator.clipboard.writeText(num).then(function() {
         copyMobileBtn.innerHTML = '\u2705';
